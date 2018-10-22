@@ -1,6 +1,6 @@
 
 {
-  "extends": [],
+  "extends": ["tslint:latest", "tslint-react"],
   "defaultSeverity": "warning",
   "linterOptions": {
     "exclude": [

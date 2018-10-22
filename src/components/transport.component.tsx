@@ -3,6 +3,7 @@ import { Instrument } from './instrument';
 import { Steps } from './steps';
 import { InstrumentHack } from './instrument-hack';
 import { Transport } from 'tone';
+import { Tone } from 'tone';
 import { PlayPause } from './play';
 export class TransportComponent extends React.Component<any, any> {
     constructor(props) {
@@ -21,6 +22,7 @@ export class TransportComponent extends React.Component<any, any> {
     }
 
     play = () => {
+        Transport.bpm.value = 130;
         Transport.start();
     }
 
@@ -43,7 +45,7 @@ export class TransportComponent extends React.Component<any, any> {
         }
     }
 
-    render() {
+        render() {
         return (
             <div>
                 <h1>drum machine v0.01111111167b696969</h1>

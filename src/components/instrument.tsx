@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { Time, Transport } from 'tone';
-import { Clap } from '../engines/clap';
-import { InstrumentEngine } from '../engines/engines';
-import { HiHat } from '../engines/hat';
-import { Kick } from '../engines/kick';
-import { Snare } from '../engines/snare';
-import  Tone  from 'tone';
+import * as React from "react";
+import { Time, Transport } from "tone";
+import { Clap } from "../engines/clap";
+import { InstrumentEngine } from "../engines/engines";
+import { HiHat } from "../engines/hat";
+import { Kick } from "../engines/kick";
+import { Snare } from "../engines/snare";
+import  Tone  from "tone";
 
-import { VolumeSlider } from '../components/UI-components/volumeSlider'
+import { VolumeSlider } from "../components/UI-components/volumeSlider"
 
 export interface InstrumentProps {
     engine: string;
@@ -79,7 +79,7 @@ export class Instrument extends React.Component<InstrumentProps, any> {
                     }
                     this.player.start(time + i * Time('16n').toSeconds())
                 }
-                this.setState({ index: i });
+                this.setState({index: i})
             });
         }
         this.loopId = Transport.schedule(loop, "0");
@@ -102,15 +102,19 @@ export class Instrument extends React.Component<InstrumentProps, any> {
             width: '40px',
             height: '1.5em',
             borderRadius: '10px',
-            display: 'inline-block'
+            display: 'inline-block',
+        }
+        const StyleBot = {
+            marginBottom: '5px'
         }
         const Slider = {
             height: '100px'
         }
         return (<div>
             <VolumeSlider style={Slider}/>
+            <h1>{this.state.index}</h1>
             <div style={InstrumentStyle} onClick={this.testClickHandle}>mute</div><br/>
-                <div style={InstrumentStyle} onClick={this.handleClick}>
+                <div style={{...InstrumentStyle, ...StyleBot}} onClick={this.handleClick}>
                 {this.props.engine}
             </div >
         </div>

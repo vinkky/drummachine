@@ -24,7 +24,8 @@ export class Step extends React.Component<StepProps> {
         }
         
         return (
-            <div style={style} onClick={this.handleClick}></div>
+            <div style={style} onClick={this.handleClick}>
+            <h5>{this.props.id+1}</h5></div>
         )
     }
 

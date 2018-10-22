@@ -18,7 +18,6 @@ import Slider from "@material-ui/lab/Slider";
     return (
       <div style={{height: '60px'}} >
         <Slider
-         
           value={this.state.value}
           onChange={this.handleChange}
           vertical

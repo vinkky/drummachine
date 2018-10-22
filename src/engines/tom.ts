@@ -39,14 +39,13 @@ export class Snare implements InstrumentEngine {
     }
 
     noiseBuffer() {
-        var bufferSize = this.ctx.sampleRate;
-        var buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const bufferSize = this.ctx.sampleRate;
+        const  buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
         var output = buffer.getChannelData(0);
 
         for (var i = 0; i < bufferSize; i++) {
             output[i] = Math.random() * 2 - 1;
         }
-
         return buffer;
     }
 
