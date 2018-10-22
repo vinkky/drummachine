@@ -5,7 +5,7 @@ export class Mute extends React.Component<any, any> {
         super(props);
 
         this.state = {
-            playing: false,
+            playing: true,
         }
     }
 
@@ -18,20 +18,12 @@ export class Mute extends React.Component<any, any> {
             this.props.play();
         }
         this.setState({
-            mute: !this.state.play
+            playing: !this.state.playing
         });
     }
     render() {
         const InstrumentStyle = {
-            cursor: 'pointer',
-            fontSize: '0.5em',
-            backgroundColor: this.state.playing ? '#2AC7DC' : '#696969',
-            color: 'white',
-            marginLeft: '2px',
-            marginTop: '2px',
-            width: '80px',
-            height: '2.0em',
-            borderRadius: '10px',
+       
         }
         return (
             <button style={InstrumentStyle} onClick={this.handleClick}>

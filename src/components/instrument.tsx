@@ -1,13 +1,13 @@
-import * as React from "react";
-import { Time, Transport } from "tone";
-import { Clap } from "../engines/clap";
-import { InstrumentEngine } from "../engines/engines";
-import { HiHat } from "../engines/hat";
-import { Kick } from "../engines/kick";
-import { Snare } from "../engines/snare";
-import  Tone  from "tone";
-
-import { VolumeSlider } from "../components/UI-components/volumeSlider"
+import * as React from 'react';
+import { Time, Transport } from 'tone';
+import { Clap } from '../engines/clap';
+import { InstrumentEngine } from '../engines/engines';
+import { HiHat } from '../engines/hat';
+import { Kick } from '../engines/kick';
+import { Snare } from '../engines/snare';
+import  Tone  from 'tone';
+import { Mute } from '../components/mute';
+import { VolumeSlider } from '../components/UI-components/volumeSlider'
 
 export interface InstrumentProps {
     engine: string;
@@ -79,7 +79,6 @@ export class Instrument extends React.Component<InstrumentProps, any> {
                     }
                     this.player.start(time + i * Time('16n').toSeconds())
                 }
-                this.setState({index: i})
             });
         }
         this.loopId = Transport.schedule(loop, "0");
@@ -89,6 +88,23 @@ export class Instrument extends React.Component<InstrumentProps, any> {
         if (this.props.handleClick) this.props.handleClick(this.props.engine, this.state.steps.slice(0));
     }
 
+    mute = () => {
+        if(this.sound){
+            this.sound.setVolume(0); 
+        }
+        if(this.player){
+            this.player.volume.value = -10e9
+        }
+    }
+
+    play = () => {
+        if(this.sound){
+            this.sound.setVolume(1); 
+        }
+        if(this.player){
+            this.player.volume.value = 1
+        }
+    }
     render() {
         console.log('index' ,this.state.index)
         const InstrumentStyle = {
@@ -113,7 +129,8 @@ export class Instrument extends React.Component<InstrumentProps, any> {
         return (<div>
             <VolumeSlider style={Slider}/>
             <h1>{this.state.index}</h1>
-            <div style={InstrumentStyle} onClick={this.testClickHandle}>mute</div><br/>
+            <br/>
+             <Mute play={this.play} mute={this.mute} />
                 <div style={{...InstrumentStyle, ...StyleBot}} onClick={this.handleClick}>
                 {this.props.engine}
             </div >
