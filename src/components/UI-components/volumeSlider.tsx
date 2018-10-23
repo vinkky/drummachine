@@ -16,12 +16,12 @@ import Slider from "@material-ui/lab/Slider";
   render() {
 
     return (
-        <Slider
-          style={{height: '60px'}}
-          value={this.state.value}
-          onChange={this.handleChange}
-          vertical
-        />
+      <Slider
+      style={{height: '60px'}}
+      value={this.state.value}
+      onChange={this.handleChange}
+      vertical
+    />
     );
   }
 }

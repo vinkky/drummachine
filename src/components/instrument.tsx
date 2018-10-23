@@ -97,6 +97,10 @@ export class Instrument extends React.Component<InstrumentProps, any> {
     if (this.props.handleClick)
       this.props.handleClick(this.props.engine, this.state.steps.slice(0));
   };
+  paternClear = () => {
+    if (this.props.handleClick)
+      this.props.handleClick(this.props.engine, this.state.steps.slice(0));
+  };
 
   mute = () => {
     if (this.sound) {
@@ -109,22 +113,28 @@ export class Instrument extends React.Component<InstrumentProps, any> {
 
   play = () => {
     if (this.sound) {
-      this.sound.setVolume(this.state.volume/100);
+      this.sound.setVolume(this.state.volume / 100);
     }
     if (this.player) {
-      this.player.volume.value = this.state.volume/10;
+      this.player.volume.value = this.state.volume / 10;
     }
   };
 
   volumeChange = (event, value) => {
-    this.setState({volume: value });
+    this.setState({ volume: value });
     if (this.sound) {
-        this.sound.setVolume(this.state.volume/100);
-      }
-      if (this.player) {
-        this.player.volume.value = value-60;
-      }
-      console.log(this.state.volume)
+      this.sound.setVolume(this.state.volume / 100);
+    }
+    if (this.player) {
+      this.player.volume.value = value - 60;
+    }
+    console.log(this.state.volume);
+  };
+
+  clearPatern = () => {
+    this.setState({ steps: new Array(16).fill(false) });
+    if (this.props.handleClick)
+      this.props.handleClick(this.props.engine, new Array(16).fill(false));
   };
 
   render() {
@@ -148,12 +158,12 @@ export class Instrument extends React.Component<InstrumentProps, any> {
 
     return (
       <div>
-                <Slider
-      style={{height: '60px'}}
-      value={this.state.volume}
-      onChange={this.volumeChange}
-      vertical
-    />
+        <Slider
+          style={{ height: "60px" }}
+          value={this.state.volume}
+          onChange={this.volumeChange}
+          vertical
+        />
         <br />
         <Mute play={this.play} mute={this.mute} />
         <div
@@ -162,6 +172,7 @@ export class Instrument extends React.Component<InstrumentProps, any> {
         >
           {this.props.engine}
         </div>
+        <button onClick={this.clearPatern}>clear</button>
       </div>
     );
   }
