@@ -32,5 +32,4 @@ export class Step extends React.Component<StepProps> {
     private handleClick = () => {
         this.props.onClick(this.props.id);
     }
-    
 }
