@@ -143,7 +143,6 @@ export class Instrument extends React.Component<InstrumentProps, any> {
   }
 
   public render() {
-    console.log("index", this.state.index);
     const InstrumentStyle = {
       backgroundColor: this.props.selected ? "#2AC7DC" : "#696969",
       borderRadius: "10px",
