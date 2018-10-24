@@ -5,7 +5,7 @@ export class Mute extends React.Component<any, any> {
     super(props);
 
     this.state = {
-      playing: true
+      playing: true,
     };
   }
 
@@ -16,10 +16,10 @@ export class Mute extends React.Component<any, any> {
       this.props.play();
     }
     this.setState({
-      playing: !this.state.playing
+      playing: !this.state.playing,
     });
-  };
-  render() {
+  }
+  public render() {
     const InstrumentStyle = {};
     return (
       <button style={InstrumentStyle} onClick={this.handleClick}>

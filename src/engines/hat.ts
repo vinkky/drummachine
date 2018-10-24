@@ -1,14 +1,14 @@
 import { InstrumentEngine } from "./engines";
 
 export class HiHat implements InstrumentEngine {
-    private ctx: AudioContext;
-    private ratios: number[];
     public tone: number;
     public decay: number;
+    public volume: number;
+    private ctx: AudioContext;
+    private ratios: number[];
     private oscEnvelope: GainNode;
     private bndPass: BiquadFilterNode;
     private hipass: BiquadFilterNode;
-    public volume: number;
 
     constructor(ctx) {
         this.ctx = ctx;
@@ -18,10 +18,10 @@ export class HiHat implements InstrumentEngine {
         this.volume = 1;
     }
 
-    setup() {
+    public setup() {
         this.oscEnvelope = this.ctx.createGain();
         this.bndPass = this.ctx.createBiquadFilter();
-        this.bndPass.type = 'bandpass';
+        this.bndPass.type = "bandpass";
         this.bndPass.frequency.value = 20000;
         this.bndPass.Q.value = 0.2;
         this.hipass = this.ctx.createBiquadFilter();
@@ -33,11 +33,11 @@ export class HiHat implements InstrumentEngine {
         this.oscEnvelope.connect(this.ctx.destination);
     }
 
-    trigger(time) {
-        if (this.volume == 0) { return };
+    public trigger(time) {
+        if (this.volume === 0) { return; }
         this.setup();
         this.ratios.forEach((ratio) => {
-            var osc = this.ctx.createOscillator();
+            const osc = this.ctx.createOscillator();
             osc.type = "square";
             osc.frequency.value = this.tone * ratio;
             osc.connect(this.bndPass);
@@ -50,13 +50,13 @@ export class HiHat implements InstrumentEngine {
         this.oscEnvelope.gain.exponentialRampToValueAtTime(0.00001 * this.volume, time + this.decay);
     }
 
-    setTone = (tone: number) => {
+    public setTone = (tone: number) => {
         this.tone = tone;
     }
-    setDecay = (decay: number) => {
+    public setDecay = (decay: number) => {
         this.decay = decay;
     }
-    setVolume = (vol: number) => {
+    public setVolume = (vol: number) => {
         this.volume = vol;
     }
 }

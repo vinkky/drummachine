@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 export class PlayPause extends React.Component<any, any> {
     constructor(props) {
@@ -6,7 +6,7 @@ export class PlayPause extends React.Component<any, any> {
 
         this.state = {
             playing: false,
-        }
+        };
     }
 
     public handleClick = () => {
@@ -16,24 +16,25 @@ export class PlayPause extends React.Component<any, any> {
             this.props.play();
         }
         this.setState({
-            playing: !this.state.playing
+            playing: !this.state.playing,
         });
     }
-    render() {
+    public render() {
         const InstrumentStyle = {
-            cursor: 'pointer',
-            fontSize: '0.5em',
-            backgroundColor: this.state.playing ? '#2AC7DC' : '#696969',
-            color: 'white',
-            marginLeft: '2px',
-            marginTop: '2px',
-            width: '80px',
-            height: '2.0em',
-            borderRadius: '10px',
-        }
+            cursor: "pointer",
+            fontSize: "0.5em",
+            // tslint:disable-next-line:object-literal-sort-keys
+            backgroundColor: this.state.playing ? "#2AC7DC" : "#696969",
+            color: "white",
+            marginLeft: "2px",
+            marginTop: "2px",
+            width: "80px",
+            height: "2.0em",
+            borderRadius: "10px",
+        };
         return (
             <button style={InstrumentStyle} onClick={this.handleClick}>
-                {this.state.playing ? 'Pause' : 'Play'}
+                {this.state.playing ? "Pause" : "Play"}
             </button>
         );
     }

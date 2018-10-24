@@ -1,14 +1,14 @@
-import * as React from 'react';
+import * as React from "react";
 
 export class InstrumentHack extends React.Component<any> {
     constructor(props) {
         super(props);
     }
 
-    render() {
-        console.log('the selected si ', this.props.selectedInstrument);
+    public render() {
+        console.log("the selected si ", this.props.selectedInstrument);
         const childrenWithProps = React.Children.map(this.props.children, (child) => {
-            if (typeof child === 'object') {
+            if (typeof child === "object") {
                 if (child.key === this.props.selectedInstrument) {
                     return React.cloneElement(child, { steps: this.props.steps, selected: true });
                 } else {
@@ -19,9 +19,9 @@ export class InstrumentHack extends React.Component<any> {
         });
 
         return (
-            <div style={{ display: 'flex', flexDirection: 'row'}}>
+            <div style={{ display: "flex", flexDirection: "row"}}>
                 {childrenWithProps}
             </div>
-        )
+        );
     }
 }

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { TransportComponent } from './components/transport.component';
-import './App.css';
+import * as React from "react";
+import "./App.css";
+import { TransportComponent } from "./components/transport.component";
 
 class App extends React.Component {
   public render() {

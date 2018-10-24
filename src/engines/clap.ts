@@ -18,25 +18,24 @@ export class Clap implements InstrumentEngine {
         this.ctx = ctx;
     }
 
-    noiseBuffer() {
-        var bufferSize = this.ctx.sampleRate;
-        var buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-        var output = buffer.getChannelData(0);
+    public noiseBuffer() {
+        const bufferSize = this.ctx.sampleRate;
+        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const output = buffer.getChannelData(0);
 
-        for (var i = 0; i < bufferSize; i++) {
+        for (let i = 0; i < bufferSize; i++) {
             output[i] = Math.random() * 2 - 1;
         }
         return buffer;
     }
 
-    setup() {
+    public setup() {
         this.noise = this.ctx.createBufferSource();
         this.noise.buffer = this.noiseBuffer();
         this.filter = this.ctx.createBiquadFilter();
-        this.filter.type = 'bandpass';
+        this.filter.type = "bandpass";
         this.filter.frequency.value = this.tone * 2;
         this.envelope = this.ctx.createGain();
-
 
         this.noise.connect(this.filter);
         this.filter.connect(this.envelope);
@@ -44,8 +43,8 @@ export class Clap implements InstrumentEngine {
         this.envelope.connect(this.ctx.destination);
     }
 
-    trigger = (time: number) => {
-        if (this.volume == 0) { return };
+    public trigger = (time: number) => {
+        if (this.volume === 0) { return; }
         this.setup();
         this.envelope.gain.setValueAtTime(this.volume, time);
         this.envelope.gain.exponentialRampToValueAtTime(0.1, time + this.pulseWidth);
@@ -56,17 +55,16 @@ export class Clap implements InstrumentEngine {
         this.envelope.gain.setValueAtTime(this.volume, time + 2 * this.pulseWidth);
         this.envelope.gain.exponentialRampToValueAtTime(0.001, time + this.decay);
 
-
-        this.noise.start(time)
+        this.noise.start(time);
         this.noise.stop(time + this.decay);
     }
-    setTone = (tone: number) => {
+    public setTone = (tone: number) => {
         this.tone = tone;
     }
-    setDecay = (decay: number) => {
+    public setDecay = (decay: number) => {
         this.decay = decay;
     }
-    setVolume = (vol: number) => {
+    public setVolume = (vol: number) => {
         this.volume = vol;
     }
 }
