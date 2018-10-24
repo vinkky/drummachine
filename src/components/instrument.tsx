@@ -92,7 +92,7 @@ export class Instrument extends React.Component<InstrumentProps, any> {
         }
       });
     };
-    this.loopId = Transport.schedule(loop, "0");
+    this.loopId = Transport.schedule(loop, "16n");
   }
 
   public handleClick = () => {
@@ -169,14 +169,14 @@ export class Instrument extends React.Component<InstrumentProps, any> {
           vertical={true}
         />
         <br />
-        <Mute play={this.play} mute={this.mute} />
+        <Mute play={this.play} mute={this.mute} /><br/>
         <div
           style={{ ...InstrumentStyle, ...StyleBot }}
           onClick={this.handleClick}
         >
           {this.props.engine}
-        </div>
-        <button onClick={this.clearPatern}>clear</button>
+        </div><br/>
+        <button style={InstrumentStyle} onClick={this.clearPatern}>clear</button>
       </div>
     );
   }

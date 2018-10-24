@@ -5,13 +5,12 @@ export interface StepProps {
     id: number;
     onClick: (id: number) => void;
     on: boolean;
+    current: number;
 }
 
 export class Step extends React.Component<StepProps> {
 
     public render() {
-
-        console.log(this.props.id);
         const style = {
             width: "2.5em",
             // tslint:disable-next-line:object-literal-sort-keys
@@ -24,10 +23,13 @@ export class Step extends React.Component<StepProps> {
             marginLeft: 2,
             display: "inline-block",
         };
+        const currentStep = {
+            color: this.props.id === this.props.current ? 'green' : 'white'
+        }
 
         return (
             <div style={style} onClick={this.handleClick}>
-            <h5>{this.props.id + 1}</h5></div>
+            <h5 style={currentStep}>{this.props.id + 1}</h5></div>
         );
     }
 

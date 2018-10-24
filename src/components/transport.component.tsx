@@ -1,13 +1,16 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { Transport } from "tone";
+import { indexSet } from "../actions/actions";
 import { Instrument } from "./instrument";
 import { InstrumentHack } from "./instrument-hack";
 import { PlayPause } from "./play";
 import { Steps } from "./steps";
-export class TransportComponent extends React.Component<any, any> {
+class TransportComponent extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
+            index: 0,
             selected: null,
             steps: [false, false, false, false, false, false, false,
                 false, false, false, false, false, false, false, false, false],
@@ -17,7 +20,7 @@ export class TransportComponent extends React.Component<any, any> {
     }
 
     public pause = () => {
-        Transport.stop();
+        Transport.pause();
     }
 
     public play = () => {
@@ -26,6 +29,8 @@ export class TransportComponent extends React.Component<any, any> {
     }
 
     public render() {
+        // console.log("indexiukas", this.state.index);
+        // console.log("transport tick", Transport.tick);
         return (
             <div>
                 <h1>drum machine v0.01111111167b696969</h1>
@@ -36,7 +41,7 @@ export class TransportComponent extends React.Component<any, any> {
                     <Instrument key="Clap" engine="Clap" handleClick={this.selectInstrument} />
                     <Instrument key="HiHat" engine="HiHat" handleClick={this.selectInstrument} />
                 </InstrumentHack>
-                <Steps handleStepChange={this.handleStepChange} steps={this.state.steps} />
+                <Steps handleStepChange={this.handleStepChange} steps={this.state.steps} index={this.state.index} />
             </div>
         );
     }
@@ -60,3 +65,9 @@ export class TransportComponent extends React.Component<any, any> {
         }
     }
 }
+
+const mapStateToProps = (state) => ({
+    drum: state.drum,
+  });
+
+export default connect(mapStateToProps, {indexSet})(TransportComponent);
